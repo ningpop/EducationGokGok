@@ -9,5 +9,28 @@
 <body>
     <h1>에라잇 로그인닷</h1>
     <h2>로그인 페이지입니다.</h2>
+
+    {% if error %}
+    {{ error }}
+    <br>
+    <br>
+    {% endif %}
+
+    <h1>Login</h1>
+
+    <form method="POST" action="{% url 'login'%}">
+    
+    {% csrf_token %}
+    Username:
+    <br>
+    <input id = "username" name="username" type="text" value="">
+    <br>
+    Password:
+    <br>
+    <input id = "password1"  name="password1" type="password" value="">
+    <br>
+    <br>
+    <input class="btn btn-primary" type="submit" value="Login">
+</form>
 </body>
 </html>

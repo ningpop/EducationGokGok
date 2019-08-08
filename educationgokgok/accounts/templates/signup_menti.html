@@ -9,5 +9,38 @@
 <body>
     <h1>에라잇 사인업 멘티닷</h1>
     <h2>멘티 회원가입 페이지입니다.</h2>
+
+    <h1>Sign Up!</h1>
+
+    <form method="POST" action="{% url 'signup_menti'%}">
+        {% csrf_token %}
+        Username:
+        <br>   
+        <input id = "username" name="username" type="text" value="">
+        <br>
+        Password :
+        <br>
+        <input id = "password1"  name="password1" type="password" value="">
+        <br>
+        Confirm Password :
+        <br>
+        <input id = "password2"  name="password2" type="password" value="">
+        <br>
+        Email :
+        <br>
+        <input id = "email"  name="email" type="text" value="" style="width:170px">ex)abc@likelion.org
+        <br>
+        PhoneNumber :
+        <br>
+        <input id = "phoneNumber"  name="phoneNumber" type="text" value="" maxlength="13"></input>ex) 010-0000-0000
+        <br>
+        Gender : <br>
+        <label for="s1">female</label>
+        <input type="radio" name="gender" value="female"/><br>
+        <label for="s1">male</label>
+        <input type="radio" name="gender" value="male"/><br>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Sign Up!">
+    </form>
 </body>
 </html>

@@ -38,7 +38,7 @@ def detail(request, post_id):
 
 def board_main(request):
     '''
-    post_list = AAA.objects.all()
+    post_list = AAA.objects.order_by('-pub_date')
     paginator = Paginator(post_list, 10)
     page = request.GET.get('page')
     board = paginator.get_page(page)
@@ -46,20 +46,31 @@ def board_main(request):
     '''
     return render(request, 'board_main.html')
 
+'''
+* 전공 목록 *
+IT 음악 미술 체육 etc
+'''
 def board_major(request):
     '''
-    post_list = AAA.objects.all()
-    paginator = Paginator(post_list, 10)
+    major_post_list = AAA.objects.order_by('major', '-pub_date') # major: 필드명
+    paginator = Paginator(major_post_list, 10)
     page = request.GET.get('page')
     board = paginator.get_page(page)
     return render(request, 'board_main.html', {'board':board})
     '''
     return render(request, 'board_major.html')
 
+'''
+* 지역 목록 *
+특별시: 서울(1)
+광역시: 부산(2) 대구(3) 인천(4) 광주(5) 대전(6) 울산(7)
+특별자치시: 세종(8)
+도: 경기(10) 강원(11) 충청(12) 전라(13) 경상(14) 제주(15)
+'''
 def board_local(request):
     '''
-    post_list = AAA.objects.all()
-    paginator = Paginator(post_list, 10)
+    local_post_list = AAA.objects.order_by('area', -pub_date') # area: 필드명
+    paginator = Paginator(local_post_list, 10)
     page = request.GET.get('page')
     board = paginator.get_page(page)
     return render(request, 'board_main.html', {'board':board})
