@@ -20,3 +20,15 @@ class Mento(models.Model):
 
     def __str__(self):
         return self.title
+
+'''
+    멘티 게시글 클래스
+    - 사진
+    - 지역
+    - 연락수단
+'''
+
+class Menti(models.Model):
+    image = models.ImageField(upload_to = 'images/')
+    area = models.TextField(max_length=10)
+    connect = models.TextField(max_length=10)

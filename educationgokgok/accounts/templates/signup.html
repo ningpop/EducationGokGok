@@ -1,16 +1,24 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>교육곡곡</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block navbar %}
+    <li class="nav-item">
+        <a class="nav-link link text-black display-4" href="{% url 'board_main' %}">전체 강의 보기</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link link text-black display-4" href="{% url 'board_local' %}">지역별 교육</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link link text-black display-4" href="{% url 'board_major' %}">분야별 교육</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link link text-black display-4" href="{% url 'aboutus' %}">About Us</a>
+    </li>
+{% endblock %}
+
     <h1>에라잇 사인업이닷</h1>
     <h2>회원가입 페이지입니다.</h2>
-    <!-- <a href="{% url 'signup_mento' %}">멘토로 가입하기</a> -->
-    <!-- <a href="{% url 'signup_menti' %}">멘티로 가입하기</a> -->
 
     {% if user.is_authenticated %}
     <script type="text/javascript">
@@ -39,18 +47,15 @@
     <label for="house-orp-id">남</label>
     <input type="radio" name="gender" value="1"/>
     <label for="house-inm-id">여</label>
-    </br>
+    <br>
     <input type="radio" name="h-type" value="0"/>
     <label for="house-orp-id">멘토</label>
     <input type="radio" name="h-type" value="1"/>
     <label for="house-inm-id">멘티</label>
-    </br>
+    <br>
     <button type="submit" class="save btn btn-success">회원가입</button>
     <a href="{% url 'index' %}">
     <button type="button" class="btn btn-danger">취소</button>
   </a>
 </form>
 {% endif %}
-
-</body>
-</html>
