@@ -4,7 +4,7 @@
 
 {% block navbar %}
     <li class="nav-item">
-        <a class="nav-link link text-black display-4" href="{% url 'board_main' %}">전체 강의 보기</a>
+        <a class="nav-link link text-black display-4" href="{% url 'board_main' %}">전체강의보기</a>
     </li>
     <li class="nav-item">
         <a class="nav-link link text-black display-4" href="{% url 'board_local' %}">지역별 교육</a>
@@ -13,12 +13,66 @@
         <a class="nav-link link text-black display-4" href="{% url 'board_major' %}">분야별 교육</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link link text-black display-4" href="{% url 'aboutus' %}">About Us</a>
+        <a class="nav-link link text-black display-4" href="{% url 'aboutus' %}">About us</a>
     </li>
 {% endblock %}
 
-    <h1>에라잇 사인업이닷</h1>
-    <h2>회원가입 페이지입니다.</h2>
+                {% if user.is_authenticated %}
+                
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link link text-black display-4" href="{% url 'login' %}">login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link text-black display-4" href="{% url 'signup' %}">sign-up</a>
+                </li>
+                {% endif %}
+            </ul>
+                
+            </div>
+        </nav>
+    </section>
+
+    <section class="cid-ruNtyUeTOv mbr-fullscreen mbr-parallax-background" id="header2-1">
+        <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(7, 59, 76);"></div>
+
+        <div class="container align-center">
+            <div class="row justify-content-md-center">
+                <div class="mbr-white col-md-10">
+                    <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1"><span style="font-weight: normal;">
+                        교육의 기회를<br>우리나라 방방곡곡으로.</span></h1>
+                    
+                    <p class="mbr-text pb-3 mbr-fonts-style display-5">
+                        언제, 어디서나, 누구나 멘토와 멘티가 될 수 있습니다.<br>
+                        단순 재능공유에서 나아가 지역별 매칭 서비스.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% block content %}
+    <section class="cid-ruNtyUeTOv mbr-fullscreen mbr-parallax-background" id="header2-1">
+        <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(7, 59, 76);"></div>
+
+        <div class="container align-center">
+            <div class="row justify-content-md-center">
+                <div class="mbr-white col-md-10">
+                    <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-1"><span style="font-weight: normal;">
+                        교육의 기회를<br>우리나라 방방곡곡으로.</span></h1>
+                    
+                    <p class="mbr-text pb-3 mbr-fonts-style display-5">
+                        언제, 어디서나, 누구나 멘토와 멘티가 될 수 있습니다.<br>
+                        단순 재능공유에서 나아가 지역별 매칭 서비스.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <br><br>
+    <div class = 'container'>
+    <h2>교육 곡곡 회원가입!</h2>
 
     {% if user.is_authenticated %}
     <script type="text/javascript">
@@ -28,7 +82,6 @@
     {% else %}
 <form method="POST" action="" class="sign-up-form">
   {%csrf_token%}
-  <h2 class="sub-title"> 회원가입 </h2>
   {% for field in user_form %}
       <div class="form-group">
         {{ field.label }}
@@ -59,3 +112,6 @@
   </a>
 </form>
 {% endif %}
+<br><br>
+</div>
+{% endblock %}

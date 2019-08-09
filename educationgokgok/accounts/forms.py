@@ -28,7 +28,6 @@ class UserForm(forms.ModelForm):
         super(UserForm, self).__init__( *args, **kwargs)
         self.fields['username'].widget.attrs['maxlength'] = 15
 
-
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
