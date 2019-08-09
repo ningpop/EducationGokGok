@@ -9,7 +9,48 @@
 <body>
     <h1>에라잇 사인업이닷</h1>
     <h2>회원가입 페이지입니다.</h2>
-    <a href="{% url 'signup_mento' %}">멘토로 가입하기</a>
-    <a href="{% url 'signup_menti' %}">멘티로 가입하기</a>
+    <!-- <a href="{% url 'signup_mento' %}">멘토로 가입하기</a> -->
+    <!-- <a href="{% url 'signup_menti' %}">멘티로 가입하기</a> -->
+
+    {% if user.is_authenticated %}
+    <script type="text/javascript">
+        alert('잘못된 접근입니다. \n회원가입을 위해서는 로그아웃이 필요합니다.')
+        window.location.href = '/'
+    </script>
+    {% else %}
+<form method="POST" action="" class="sign-up-form">
+  {%csrf_token%}
+  <h2 class="sub-title"> 회원가입 </h2>
+  {% for field in user_form %}
+      <div class="form-group">
+        {{ field.label }}
+        {{field}}
+      </div>
+  {% endfor %}
+
+  {% for field in profile_form %}
+      <div class="form-group">
+        {{ field.label }}
+        {{field}}
+      </div>
+  {% endfor %}
+
+    <input type="radio" name="gender" value="0"/>
+    <label for="house-orp-id">남</label>
+    <input type="radio" name="gender" value="1"/>
+    <label for="house-inm-id">여</label>
+    </br>
+    <input type="radio" name="h-type" value="0"/>
+    <label for="house-orp-id">멘토</label>
+    <input type="radio" name="h-type" value="1"/>
+    <label for="house-inm-id">멘티</label>
+    </br>
+    <button type="submit" class="save btn btn-success">회원가입</button>
+    <a href="{% url 'index' %}">
+    <button type="button" class="btn btn-danger">취소</button>
+  </a>
+</form>
+{% endif %}
+
 </body>
 </html>

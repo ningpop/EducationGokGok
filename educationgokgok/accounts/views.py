@@ -1,38 +1,51 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib import auth
-
+from django.contrib.auth import login
+from .forms import UserForm , ProfileForm
 # Create your views here.
 # 멘토 멘티를 따로 데이터를 저장해줘야할꺼같은데.... 그 부분을 아직 못함....
 
 def signup(request):
-    return render(request, 'signup.html')
+    if request.method == "POST":
+        user_form = UserForm(request.POST)
+        Profile_form = ProfileForm(request.POST)
 
-def signup_mento(request):
-    '''
-    if request.method == 'POST':
-        if request.POST['password1'] == request.POST['password2']:
-            user = User.objects.create_user(
-                request.POST['username'], password=request.POST['password1'], email=request.POST['email'])
-            user.profile.phoneNumber = request.POST['phoneNumber']
-            user.profile.gender = request.POST['gender']
-            auth.login(request, user)
-            return redirect('index')
-    '''
-    return render(request, 'signup_mento.html')
+        if all((user_form.is_valid(), Profile_form.is_valid())):
+            user = user_form.save(commit=False)
+            profile = Profile_form.save(commit=False)
 
-def signup_menti(request):
-    '''
-    if request.method == 'POST':
-        if request.POST['password1'] == request.POST['password2']:
-            user = User.objects.create_user(
-                request.POST['username'], password=request.POST['password1'], email=request.POST['email'])
-            user.profile.phoneNumber = request.POST['phoneNumber']
-            user.profile.gender = request.POST['gender']
-            auth.login(request, user)
+            if request.POST.get('h-type') == '0':
+                user.is_staff = True
+
+            else:
+                user.is_staff = False
+            
+            if request.POST.get('gender')=='0':
+                profile.female = True
+
+            else:
+                profile.female = False
+
+            user.save()
+            profile.user = user
+            profile.save()
+            login(request, user)
+            
             return redirect('index')
-    '''
-    return render(request, 'signup_menti.html')
+
+        else:
+            return HttpResponse('사용자명이 이미 존재합니다.')
+
+    else:
+        user_form = UserForm()
+        profile_form = ProfileForm()
+
+        return render(request, 'signup.html',  {
+            'user_form': user_form,
+            "profile_form": profile_form
+            })
+
 
 def login(request):
     '''
