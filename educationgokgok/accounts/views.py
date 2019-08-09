@@ -46,7 +46,7 @@ def signup(request):
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
-        password = request.POST['password1']
+        password = request.POST['pwd']
 
         user = auth.authenticate(request, username=username, password=password)
         print("!!!!", user)
